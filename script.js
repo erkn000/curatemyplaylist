@@ -78,8 +78,8 @@
 
     const payload = {
       access_key: ACCESS_KEY,
-      subject: 'NeedleSkip beta signup',
-      from_name: 'NeedleSkip',
+      subject: 'Curate My Playlist beta signup',
+      from_name: 'Curate My Playlist',
       email: email,
       botcheck: ''
     };
