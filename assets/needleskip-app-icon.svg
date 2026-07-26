@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" role="img" aria-label="NeedleSkip">
+  <rect width="120" height="120" rx="27" fill="#14151d"/>
+  <g fill="#f5f6fa">
+    <ellipse cx="46" cy="76" rx="13.5" ry="10.5" transform="rotate(-28 46 76)"/>
+    <rect x="55" y="30" width="6.5" height="50" rx="3.25"/>
+    <path d="M61.5 30 C88 38 94 47 85 55 C76 63 61.5 50 61.5 50 Z"/>
+  </g>
+  <path
+    d="M51 78 L61 88 L83 62"
+    fill="none"
+    stroke="#4d63ff"
+    stroke-width="8.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>
