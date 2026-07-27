@@ -1,3 +1,3 @@
 # curatemyplaylist
 
-Curate My Playlist — a smarter layer on top of Spotify.
+CurateMyPlaylist — a smarter layer on top of Spotify.

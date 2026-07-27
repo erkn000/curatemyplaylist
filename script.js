@@ -51,6 +51,44 @@
   mosaic.appendChild(frag);
 })();
 
+// ---------- Signup attribution (UTM / ref params) ----------
+(function captureAttribution() {
+  const STORAGE_KEY = 'cmp_attribution';
+  const PARAMS = ['utm_source', 'utm_medium', 'utm_campaign', 'ref'];
+
+  try {
+    if (sessionStorage.getItem(STORAGE_KEY)) return;
+
+    const params = new URLSearchParams(window.location.search);
+    const attribution = {};
+    let hasAny = false;
+
+    PARAMS.forEach(function (key) {
+      const value = params.get(key);
+      if (value) {
+        attribution[key] = value;
+        hasAny = true;
+      }
+    });
+
+    if (!hasAny) attribution.utm_source = 'direct';
+
+    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(attribution));
+  } catch (err) {
+    // sessionStorage unavailable (private browsing, etc.)
+  }
+})();
+
+function getAttribution() {
+  try {
+    const raw = sessionStorage.getItem('cmp_attribution');
+    if (raw) return JSON.parse(raw);
+  } catch (err) {
+    // ignore parse errors
+  }
+  return { utm_source: 'direct' };
+}
+
 // ---------- Beta signup form (Web3Forms) ----------
 (function wireSignupForm() {
   const WEB3FORMS_URL = 'https://api.web3forms.com/submit';
@@ -76,13 +114,16 @@
     note.textContent = 'Submitting…';
     note.style.color = '#a3a4b3';
 
-    const payload = {
-      access_key: ACCESS_KEY,
-      subject: 'Curate My Playlist beta signup',
-      from_name: 'Curate My Playlist',
-      email: email,
-      botcheck: ''
-    };
+    const payload = Object.assign(
+      {
+        access_key: ACCESS_KEY,
+        subject: 'CurateMyPlaylist beta signup',
+        from_name: 'CurateMyPlaylist',
+        email: email,
+        botcheck: ''
+      },
+      getAttribution()
+    );
 
     try {
       const response = await fetch(WEB3FORMS_URL, {
